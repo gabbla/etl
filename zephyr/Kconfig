@@ -1,0 +1,209 @@
+config ZEPHYR_ETL_MODULE
+    bool
+
+config ETL
+    bool "Enable the ETL library"
+    depends on ZEPHYR_ETL_MODULE
+    #depends on CPP
+    help
+        This option enables the Embedded Template Library.
+    
+config ZEPHYR_BUILD
+    bool
+
+if ETL
+
+module = ETL
+module-str = ETL
+
+# Configurations are taken from https://www.etlcpp.com/macros.html
+
+config ETL_NO_CHECKS
+    bool "ETL_ASSERT has no effect (ETL_NO_CHECKS)"
+
+config ETL_THROW_EXCEPTIONS
+    bool "ETL_ASSERT throws the specified exception"
+    depends on CPP_EXCEPTIONS
+
+config ETL_LOG_ERRORS
+    bool "ETL_ASSERT calls the error handler then asserts"
+
+config ETL_CHECK_PUSH_POP
+    bool "Pushes and pops to containers are checked for bounds"
+
+config ETL_VERBOSE_ERRORS
+    bool "Error messages and ouput in their long form"
+
+#config ETL_BITSET_ELEMENT_TYPE
+#    string "Type used for elements in the bitset class"
+#    default "uint_least8_t"
+#
+#config ETL_FSM_STATE_ID_TYPE
+#    string "Type used for FSM state id numbers"
+#    default "uint_least8_t"
+#
+#config ETL_MESSAGE_ID_TYPE
+#    string "Type used for message id numbers"
+#    default "uint_least8_t"
+#
+#config ETL_TIMER_SEMAPHORE_TYPE
+#    string "Type used for the timer guard variable"
+#    default "etl::atomic_uint32_t"
+#    help
+#        This must be a type that cannot be interrupted ruring a RMW cycle
+
+config ETL_ISTRING_REPAIR_ENABLE
+    bool "ETL_ISTRING_REPAIR_ENABLE"
+
+config ETL_IVECTOR_REPAIR_ENABLE
+    bool "ETL_IVECTOR_REPAIR_ENABLE"
+
+config ETL_IDEQUE_REPAIR_ENABLE
+    bool "ETL_IDEQUE_REPAIR_ENABLE"
+
+config ETL_NO_STL
+    bool "Do not rely on the standard library (ETL_NO_STL)"
+    help
+        ETL will use its own reverse engineered versions of traits and algorithms
+
+config ETL_FORCE_EXPLICIT_STRING_CONVERSION_FROM_CHAR
+    bool "Force explicit construction from char* fro strings"
+
+config ETL_ENABLE_ERROR_ON_STRING_TRUNCATION
+    bool "Emit string truncation errors"
+    help
+        A string truncation will result in an etl::string_truncation error being emitted
+
+config ETL_ARRAY_VIEW_IS_MUTABLE
+    bool "etl::array_view is mutable"
+
+menu "Polymorphism"
+
+config ETL_POLYMORPHIC_MESSAGES
+    bool "etl::imessage is virtual"
+
+config ETL_POLYMORPHIC_CONTAINERS
+    bool "All the containers are polymorphic"
+
+config ETL_POLYMORPHIC_BITSET
+    bool "Make the bitset container polymorphic"
+    depends on !ETL_POLYMORPHIC_CONTAINERS
+
+config ETL_POLYMORPHIC_DEQUE
+    bool "Make the deque container polymorphic"
+    depends on !ETL_POLYMORPHIC_CONTAINERS
+
+config ETL_POLYMORPHIC_FLAT_MAP
+    bool "Make the flat map container polymorphic"
+    depends on !ETL_POLYMORPHIC_CONTAINERS
+
+config ETL_POLYMORPHIC_FLAT_MULTIMAP
+    bool "Make the flat multimap container polymorphic"
+    depends on !ETL_POLYMORPHIC_CONTAINERS
+
+config ETL_POLYMORPHIC_FLAT_SET
+    bool "Make the flat set container polymorphic"
+    depends on !ETL_POLYMORPHIC_CONTAINERS
+
+config ETL_POLYMORPHIC_FLAT_MULTISET
+    bool "Make the flat multiset container polymorphic"
+    depends on !ETL_POLYMORPHIC_CONTAINERS
+
+config ETL_POLYMORPHIC_FORWARD_LIST
+    bool "Make the forward list container polymorphic"
+    depends on !ETL_POLYMORPHIC_CONTAINERS
+
+config ETL_POLYMORPHIC_LIST
+    bool "Make the list container polymorphic"
+    depends on !ETL_POLYMORPHIC_CONTAINERS
+
+config ETL_POLYMORPHIC_MAP
+    bool "Make the map container polymorphic"
+    depends on !ETL_POLYMORPHIC_CONTAINERS
+
+config ETL_POLYMORPHIC_MULTIMAP
+    bool "Make the multimap container polymorphic"
+    depends on !ETL_POLYMORPHIC_CONTAINERS
+
+config ETL_POLYMORPHIC_SET
+    bool "Make the set container polymorphic"
+    depends on !ETL_POLYMORPHIC_CONTAINERS
+
+config ETL_POLYMORPHIC_MULTISET
+    bool "Make the multiset container polymorphic"
+    depends on !ETL_POLYMORPHIC_CONTAINERS
+
+config ETL_POLYMORPHIC_QUEUE
+    bool "Make the queue container polymorphic"
+    depends on !ETL_POLYMORPHIC_CONTAINERS
+
+config ETL_POLYMORPHIC_STACK
+    bool "Make the stack container polymorphic"
+    depends on !ETL_POLYMORPHIC_CONTAINERS
+
+config ETL_POLYMORPHIC_REFERENCE_FLAT_MAP
+    bool "Make the reference flat map container polymorphic"
+    depends on !ETL_POLYMORPHIC_CONTAINERS
+
+config ETL_POLYMORPHIC_REFERENCE_FLAT_MULTIMAP
+    bool "Make the reference flat multimap container polymorphic"
+    depends on !ETL_POLYMORPHIC_CONTAINERS
+
+config ETL_POLYMORPHIC_REFERENCE_FLAT_SET
+    bool "Make the reference flat set container polymorphic"
+    depends on !ETL_POLYMORPHIC_CONTAINERS
+
+config ETL_POLYMORPHIC_REFERENCE_FLAT_MULTISET
+    bool "Make the reference flat multiset container polymorphic"
+    depends on !ETL_POLYMORPHIC_CONTAINERS
+
+config ETL_POLYMORPHIC_UNORDERED_MAP
+    bool "Make the unordered map container polymorphic"
+    depends on !ETL_POLYMORPHIC_CONTAINERS
+
+config ETL_POLYMORPHIC_UNORDERED_MULTIMAP
+    bool "Make the unordered multimap container polymorphic"
+    depends on !ETL_POLYMORPHIC_CONTAINERS
+
+config ETL_POLYMORPHIC_UNORDERED_SET
+    bool "Make the unordered set container polymorphic"
+    depends on !ETL_POLYMORPHIC_CONTAINERS
+
+config ETL_POLYMORPHIC_UNORDERED_MULTISET
+    bool "Make the unordered multiset container polymorphic"
+    depends on !ETL_POLYMORPHIC_CONTAINERS
+
+config ETL_POLYMORPHIC_STRINGS
+    bool "Make the strings container polymorphic"
+    depends on !ETL_POLYMORPHIC_CONTAINERS
+
+config ETL_POLYMORPHIC_POOL
+    bool "Make the pool container polymorphic"
+    depends on !ETL_POLYMORPHIC_CONTAINERS
+
+config ETL_POLYMORPHIC_VECTOR
+    bool "Make the vector container polymorphic"
+    depends on !ETL_POLYMORPHIC_CONTAINERS
+
+endmenu # Polymorphism
+
+#choice
+#    prompt "Select the namespace to use (ETL_OR_STD)"
+#    depends on !ETL_NO_STL
+#    default NS_ETL
+#
+#config NS_ETL
+#    bool "etl"
+#
+#config NS_STL
+#    bool "stl"
+#    
+#endchoice
+
+config ETL_DEBUG
+    bool "Enable ETL debug mode (ETL_DEBUG)"
+    help
+        Enable the ETL debug mode
+
+
+endif # ETL
